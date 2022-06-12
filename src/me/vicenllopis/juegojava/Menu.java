@@ -1,9 +1,9 @@
 package me.vicenllopis.juegojava;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.function.Function;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -11,14 +11,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.GridLayout;
-import java.awt.Image;
+import javax.swing.WindowConstants;
 
-import me.vicenllopis.juegojava.juego.JuegoFrame;
-import me.vicenllopis.juegojava.objetos.interfaces.AbrirMenu;
 import me.vicenllopis.juegojava.servicios.ControlMenu;
-import me.vicenllopis.juegojava.util.Animaciones;
-import me.vicenllopis.juegojava.util.Resource;
 
 public class Menu extends JFrame {
 	private ImageIcon imagenControles = new ImageIcon("imagenes/controles.png");
@@ -27,7 +22,7 @@ public class Menu extends JFrame {
 
 	public Menu() {
 		setTitle("Menu");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(600, 400);
 		setLocationRelativeTo(null);
 		setResizable(false);

@@ -9,13 +9,12 @@ import java.io.File;
 import java.util.Random;
 
 import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
 
 import me.vicenllopis.juegojava.objetos.Fondo;
 import me.vicenllopis.juegojava.objetos.Personaje;
-import me.vicenllopis.juegojava.objetos.Planta;
 import me.vicenllopis.juegojava.objetos.Suelo;
 import me.vicenllopis.juegojava.objetos.interfaces.AbrirMenu;
 import me.vicenllopis.juegojava.servicios.ControlJuego;
@@ -23,11 +22,11 @@ import me.vicenllopis.juegojava.util.Resource;
 
 public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 	public static final float GRAVITY = 1f;
-	public static final float GROUNDY = 800;// por pixel
+	public static final float FLOOR_LEVEL = 800;// por pixel
 	public static final int GAME_PRIMER_ESTADO = 0;
 	public static final int GAME_JUGAR_ESTADO = 1;
 	public static final int GAME_FINAL_ESTADO = 2;
-	private static Thread thread;
+	private Thread thread = new Thread(this);
 	private Personaje personaje;
 	private Suelo suelo;
 	private Fondo fondo;
@@ -38,9 +37,9 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 	private AbrirMenu abrirMenu;
 	private Clip musica;
 	private boolean running = true;
+	private Random random = new Random();
 
 	public JuegoPanel(AbrirMenu abrirMenu) {
-		thread = new Thread(this);
 		personaje = new Personaje();
 		personaje.setX(150);
 		personaje.setY(150);
@@ -49,11 +48,9 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 		controller = new ControlJuego(personaje, this);
 		gameOver = Resource.getSourceImage("imagenes/GameOver.png");
 		this.abrirMenu = abrirMenu;
-		
 
 		try {
-			Random r = new Random();
-			int randomNumber = r.nextInt(2);
+			int randomNumber = random.nextInt(2);
 			AudioInputStream audioInputStream = AudioSystem
 					.getAudioInputStream(
 							new File("sonidos/canciones/cancion" + randomNumber + ".wav").getAbsoluteFile());
@@ -117,8 +114,7 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 				musica.stop();
 				musica.close();
 				try {
-					Random r = new Random();
-					int randomNumber = r.nextInt(3);
+					int randomNumber = random.nextInt(3);
 					AudioInputStream audioInputStream = AudioSystem
 							.getAudioInputStream(
 									new File("sonidos/canciones/cancion" + randomNumber + ".wav").getAbsoluteFile());
@@ -127,8 +123,10 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 					System.out.println("Error with playing sound.");
 					ex.printStackTrace();
 				}
-
-
+				break;
+			case GAME_PRIMER_ESTADO:
+				break;
+			default:
 				break;
 		}
 
@@ -163,6 +161,8 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 				controller.draw(g);
 				g.drawImage(gameOver, 300, 200, null);
 				g.drawString("Puntuacion Final: " + String.valueOf(puntos), 400, 150);
+				break;
+			default:
 				break;
 		}
 
@@ -212,12 +212,12 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

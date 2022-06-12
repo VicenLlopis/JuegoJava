@@ -6,14 +6,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 public class ControlsFrame extends JFrame {
     public ControlsFrame() {
         super("Controles");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(300, 400);
         setLocationRelativeTo(null);
         setResizable(false);

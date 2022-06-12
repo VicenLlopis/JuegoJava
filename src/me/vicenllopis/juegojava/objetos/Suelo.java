@@ -15,10 +15,10 @@ public class Suelo {
 		imgSuelo1 = Resource.getSourceImage("imagenes/suelo.png");
 		listImagen = new ArrayList<>();
 		// Para que el suelo tenga el ta�o deseado
-		int tamañoSueulo = 1600 / imgSuelo1.getWidth() + 1;
-		for (int i = 0; i < tamañoSueulo; i++) {
+		int tamanoSuelo = 1600 / imgSuelo1.getWidth() + 1;
+		for (int i = 0; i < tamanoSuelo; i++) {
 			ImagenSuelo imagenSuelo = new ImagenSuelo();
-			imagenSuelo.PosX = (int) (i * imgSuelo1.getWidth());
+			imagenSuelo.posX = (int) (i * imgSuelo1.getWidth());
 			imagenSuelo.imagen = imgSuelo1;
 			listImagen.add(imagenSuelo);
 		}
@@ -28,11 +28,11 @@ public class Suelo {
 	public void update() {
 		for (ImagenSuelo imagensuelo : listImagen) {
 			// Para elegir lo rapido que se mueve el suelo
-			imagensuelo.PosX = imagensuelo.PosX - 4;
+			imagensuelo.posX = imagensuelo.posX - 4;
 		}
 		ImagenSuelo primertElement = listImagen.get(0);
-		if (listImagen.get(0).PosX + imgSuelo1.getWidth() < 0) {
-			primertElement.PosX = listImagen.get(listImagen.size() - 1).PosX + imgSuelo1.getWidth();
+		if (listImagen.get(0).posX + imgSuelo1.getWidth() < 0) {
+			primertElement.posX = listImagen.get(listImagen.size() - 1).posX + imgSuelo1.getWidth();
 			listImagen.add(primertElement);
 			listImagen.remove(0);
 
@@ -42,16 +42,14 @@ public class Suelo {
 
 	public void draw(Graphics g) {
 		for (ImagenSuelo imagenSuelo : listImagen) {
-			g.drawImage(imagenSuelo.imagen, imagenSuelo.PosX, GROUNDY, null);
+			g.drawImage(imagenSuelo.imagen, imagenSuelo.posX, GROUNDY, null);
 		}
 
 	}
 
 	private class ImagenSuelo {
-		int PosX;
-
+		int posX;
 		BufferedImage imagen;
-
 	}
 
 }

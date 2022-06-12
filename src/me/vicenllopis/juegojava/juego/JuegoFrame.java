@@ -1,8 +1,7 @@
 package me.vicenllopis.juegojava.juego;
 
-import java.util.function.Function;
-
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 import me.vicenllopis.juegojava.objetos.interfaces.AbrirMenu;
 
@@ -14,7 +13,7 @@ public class JuegoFrame extends JFrame {
 		super("Juego Robot");
 		setSize(1100, 905);
 		setResizable(true);
-		setDefaultCloseOperation(JuegoFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		juego = new JuegoPanel(abrirMenu);
 		add(juego);

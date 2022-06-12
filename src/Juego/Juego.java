@@ -1,14 +1,11 @@
 package Juego;
 
+import java.applet.AudioClip;
 import java.awt.Color;
-
-import java.applet.*;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.lang.System.Logger;
-import java.util.logging.Level;
-import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
@@ -97,7 +94,7 @@ public class Juego extends JPanel implements Runnable, KeyListener {
 		// color del objeto
 		g.setColor(Color.red);
 		switch (estadoJuego) {
-			// Para imprimir en plantalla segun enque estado este el juego
+			// Para imprimir en plantalla segun en que estado este el juego
 			case GAME_PRIMER_ESTADO:
 				fondo.draw(g);
 				personaje.draw(g);
@@ -128,25 +125,37 @@ public class Juego extends JPanel implements Runnable, KeyListener {
 		personaje.setX(150);
 		personaje.setY(150);
 		controlEnemigos.restartEnemigos();
+		estadoJuego = GAME_JUGAR_ESTADO;
+		puntos = 0;
 	}
 
 	@Override
-	public void keyPressed(KeyEvent arg0) {
-		switch (arg0.getKeyCode()) {
+	public void keyPressed(KeyEvent ev) {
+		switch (ev.getKeyCode()) {
 			case KeyEvent.VK_SPACE:
-				if (estadoJuego == GAME_PRIMER_ESTADO) {
+				if (estadoJuego == GAME_PRIMER_ESTADO)
 					estadoJuego = GAME_JUGAR_ESTADO;
-				} else if (estadoJuego == 1) {
+				else if (estadoJuego == GAME_JUGAR_ESTADO)
 					personaje.jump();
-				} else if (estadoJuego == 2)
+				else if (estadoJuego == GAME_FINAL_ESTADO)
 					reiniciar();
-				estadoJuego = 1;
+				break;
+			case KeyEvent.VK_UP:
+				if (estadoJuego == GAME_PRIMER_ESTADO)
+					estadoJuego = GAME_JUGAR_ESTADO;
+				else if (estadoJuego == GAME_JUGAR_ESTADO)
+					personaje.jump();
+				else if (estadoJuego == GAME_FINAL_ESTADO)
+					reiniciar();
+				break;
+			case KeyEvent.VK_R:
+				reiniciar();
+				break;
 		}
-
 	}
 
 	@Override
-	// Para que el juego no empiece hastae que le des al espacio
+	// Para que el juego no empiece hasta que no le des al espacio
 	public void keyReleased(KeyEvent arg0) {
 
 	}

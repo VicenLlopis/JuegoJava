@@ -2,7 +2,6 @@ package me.vicenllopis.juegojava.objetos;
 
 import java.awt.image.BufferedImage;
 
-import Juego.Personaje;
 import me.vicenllopis.juegojava.objetos.interfaces.Enemigo;
 
 import java.awt.Graphics;
@@ -28,13 +27,11 @@ public class Planta extends Enemigo {
 		posY = y;
 	}
 
-	public Planta(Personaje personajeMain) {
+	public Planta() {
 		posX = 500;
 		posY = 720;
 		rect = new Rectangle();
-		rect.intersects(rect);
-
-	}
+		}
 
 	@Override
 	public void update() {

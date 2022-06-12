@@ -73,7 +73,7 @@ public class ControlEnemigo {
 
 	// Para seleccionar una de las dos plantas
 	private Planta getRandomPlanta() {
-		Planta planta = new Planta(personaje);
+		Planta planta = new Planta();
 		planta.setPosX(1600);
 		if (random.nextBoolean()) {
 

@@ -2,6 +2,12 @@ package me.vicenllopis.juegojava.objetos;
 
 import me.vicenllopis.juegojava.util.*;
 import java.awt.Rectangle;
+import java.io.File;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -47,9 +53,9 @@ public class Personaje {
 			speedy += GRAVITY;
 			y += speedy;
 		}
-		rect.x =  x;
-		rect.y =  y;
-		rect.width =  anim.getFrame().getWidth();
+		rect.x = x;
+		rect.y = y;
+		rect.width = anim.getFrame().getWidth();
 		rect.height = anim.getFrame().getHeight();
 	}
 
@@ -59,6 +65,16 @@ public class Personaje {
 
 	// Para que salte y poder cambiar la fuerza del salto
 	public void jump() {
+		try {
+			AudioInputStream audioInputStream = AudioSystem
+					.getAudioInputStream(new File("sonidos/jump.wav").getAbsoluteFile());
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+		} catch (Exception ex) {
+			System.out.println("Error with playing sound.");
+			ex.printStackTrace();
+		}
 		speedy = -14;
 		y += speedy;
 	}

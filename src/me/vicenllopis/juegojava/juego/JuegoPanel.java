@@ -5,7 +5,12 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Random;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
 import javax.swing.JPanel;
 
 import me.vicenllopis.juegojava.objetos.Fondo;
@@ -26,13 +31,13 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 	private Personaje personaje;
 	private Suelo suelo;
 	private Fondo fondo;
-	private Planta planta;
-	private ControlJuego controlEnemigos;
+	private ControlJuego controller;
 	private BufferedImage gameOver;
 	private int estadoJuego;
 	private int puntos;
 	private AbrirMenu abrirMenu;
-
+	private Clip musica;
+	private boolean running = true;
 
 	public JuegoPanel(AbrirMenu abrirMenu) {
 		thread = new Thread(this);
@@ -41,10 +46,23 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 		personaje.setY(150);
 		suelo = new Suelo();
 		fondo = new Fondo();
-		controlEnemigos = new ControlJuego(personaje, this);
+		controller = new ControlJuego(personaje, this);
 		gameOver = Resource.getSourceImage("imagenes/GameOver.png");
-
 		this.abrirMenu = abrirMenu;
+		
+
+		try {
+			Random r = new Random();
+			int randomNumber = r.nextInt(2);
+			AudioInputStream audioInputStream = AudioSystem
+					.getAudioInputStream(
+							new File("sonidos/canciones/cancion" + randomNumber + ".wav").getAbsoluteFile());
+			musica = AudioSystem.getClip();
+			musica.open(audioInputStream);
+		} catch (Exception ex) {
+			System.out.println("Error with playing sound.");
+			ex.printStackTrace();
+		}
 
 	}
 
@@ -56,8 +74,7 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 	// lo que se ejecuta del juego
 	@Override
 	public void run() {
-		while (true) {
-
+		while (running) {
 			try {
 				update();
 				repaint();
@@ -70,23 +87,49 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 	}
 
 	public void sumarPuntos(int puntos) {
+		try {
+			AudioInputStream audioInputStream = AudioSystem
+					.getAudioInputStream(new File("sonidos/point.wav").getAbsoluteFile());
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+		} catch (Exception ex) {
+			System.out.println("Error with playing sound.");
+			ex.printStackTrace();
+		}
 		this.puntos += puntos;
 	}
 
 	// Actualiza cada objeto
 	public void update() {
 		switch (estadoJuego) {
-			case 1:
+			case GAME_JUGAR_ESTADO:
 				fondo.update();
 				personaje.update();
 				suelo.update();
-				controlEnemigos.update();
+				controller.update();
+				musica.start();
 				if (!personaje.getVivo()) {
 					estadoJuego = GAME_FINAL_ESTADO;
 				}
+				break;
+			case GAME_FINAL_ESTADO:
+				musica.stop();
+				musica.close();
+				try {
+					Random r = new Random();
+					int randomNumber = r.nextInt(3);
+					AudioInputStream audioInputStream = AudioSystem
+							.getAudioInputStream(
+									new File("sonidos/canciones/cancion" + randomNumber + ".wav").getAbsoluteFile());
+					musica.open(audioInputStream);
+				} catch (Exception ex) {
+					System.out.println("Error with playing sound.");
+					ex.printStackTrace();
+				}
+
 
 				break;
-
 		}
 
 	}
@@ -110,30 +153,30 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 				fondo.draw(g);
 				suelo.draw(g);
 				personaje.draw(g);
-				controlEnemigos.draw(g);
+				controller.draw(g);
 				g.drawString("Puntuacion: " + String.valueOf(puntos), 900, 200);
 				break;
 			case GAME_FINAL_ESTADO:
 				fondo.draw(g);
 				suelo.draw(g);
 				personaje.draw(g);
-				controlEnemigos.draw(g);
+				controller.draw(g);
 				g.drawImage(gameOver, 300, 200, null);
 				g.drawString("Puntuacion Final: " + String.valueOf(puntos), 400, 150);
-
 				break;
 		}
 
 	}
 
 	private void reiniciar() {
+		estadoJuego = GAME_FINAL_ESTADO;
 		personaje.setVivo(true);
 		personaje.setX(150);
 		personaje.setY(150);
-		controlEnemigos.restartEnemigos();
-		estadoJuego = GAME_JUGAR_ESTADO;
+		controller.restartEnemigos();
 		puntos = 0;
 		fondo = new Fondo();
+		estadoJuego = GAME_JUGAR_ESTADO;
 	}
 
 	@Override
@@ -161,19 +204,20 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 			case KeyEvent.VK_ESCAPE:
 				abrirMenu.abrir();
 				break;
+			default:
+				break;
 		}
 	}
 
 	@Override
-	// Para que el juego no empiece hasta que no le des al espacio
-	public void keyReleased(KeyEvent arg0) {
-
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
+	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-
+		
 	}
-
 }

@@ -70,7 +70,6 @@ public class Planta extends Enemigo {
 	@Override
 	public void setSumaPunto(boolean siSumaPunto) {
 		this.siSumaPunto = siSumaPunto;
-
 	}
 
 }

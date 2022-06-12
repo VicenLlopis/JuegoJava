@@ -27,8 +27,8 @@ public class ControlJuego {
 		this.juego = juego;
 		this.personaje = personaje;
 		enemigos = new ArrayList<>();
-		imgPlanta1 = Resource.getSourceImage("imagenes/2.png");
-		imgPlanta2 = Resource.getSourceImage("imagenes/4.png");
+		imgPlanta1 = Resource.getSourceImage("imagenes/planta1.png");
+		imgPlanta2 = Resource.getSourceImage("imagenes/planta2.png");
 		random = new Random();
 		enemigos.add(getRandomPlanta());
 

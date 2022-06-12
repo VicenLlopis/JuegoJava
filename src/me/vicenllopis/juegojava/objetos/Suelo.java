@@ -12,8 +12,8 @@ public class Suelo {
 	private BufferedImage imgSuelo1;
 
 	public Suelo() {
-		imgSuelo1 = Resource.getSourceImage("imagenes/slice03_03.png");
-		listImagen = new ArrayList<ImagenSuelo>();
+		imgSuelo1 = Resource.getSourceImage("imagenes/suelo.png");
+		listImagen = new ArrayList<>();
 		// Para que el suelo tenga el ta�o deseado
 		int tamañoSueulo = 1600 / imgSuelo1.getWidth() + 1;
 		for (int i = 0; i < tamañoSueulo; i++) {

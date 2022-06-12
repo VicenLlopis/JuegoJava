@@ -152,7 +152,7 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 				suelo.draw(g);
 				personaje.draw(g);
 				controller.draw(g);
-				g.drawString("Puntuacion: " + String.valueOf(puntos), 900, 200);
+				g.drawString("Puntuacion: " + puntos, 900, 200);
 				break;
 			case GAME_FINAL_ESTADO:
 				fondo.draw(g);
@@ -160,7 +160,7 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 				personaje.draw(g);
 				controller.draw(g);
 				g.drawImage(gameOver, 300, 200, null);
-				g.drawString("Puntuacion Final: " + String.valueOf(puntos), 400, 150);
+				g.drawString("Puntuacion Final: " + puntos, 400, 150);
 				break;
 			default:
 				break;
@@ -211,13 +211,12 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
+		// No se necesita
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+		// No se necesita
 
 	}
 }

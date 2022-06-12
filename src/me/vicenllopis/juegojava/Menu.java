@@ -35,41 +35,41 @@ public class Menu extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 
-		JPanel panelmenu = new JPanel();
+		JPanel panelMenu = new JPanel();
 
-		panelmenu.setLayout(null);
-		setContentPane(panelmenu);
+		panelMenu.setLayout(null);
+		setContentPane(panelMenu);
 
-		JLabel labeltitulo = new JLabel("Juego Magico");
-		panelmenu.add(labeltitulo);
-		labeltitulo.setBounds(125, 10, 120, 40);
-		labeltitulo.setVisible(true);
+		JLabel labelTitulo = new JLabel("Juego Magico");
+		panelMenu.add(labelTitulo);
+		labelTitulo.setBounds(125, 10, 120, 40);
+		labelTitulo.setVisible(true);
 
 		// opcion jugar del menu
 		imagenJugar = new ImageIcon("imagenes/button (5).png");
-		JLabel botonjugar = new JLabel(imagenJugar);
-		panelmenu.add(botonjugar);
-		botonjugar.setBounds(115, 90, 150, 40);
-		botonjugar.setVisible(true);
+		JLabel botonJugar = new JLabel(imagenJugar);
+		panelMenu.add(botonJugar);
+		botonJugar.setBounds(115, 90, 150, 40);
+		botonJugar.setVisible(true);
 
 		// opcion de Salir del menu
 		imageSalir = new ImageIcon("imagenes/button (1).png");
-		JLabel botonsalir = new JLabel(imageSalir);
-		panelmenu.add(botonsalir);
-		botonsalir.setBounds(115, 290, 150, 40);
-		botonsalir.setVisible(true);
+		JLabel botonSalir = new JLabel(imageSalir);
+		panelMenu.add(botonSalir);
+		botonSalir.setBounds(115, 290, 150, 40);
+		botonSalir.setVisible(true);
 
 		// Opcion para ver los Contoles en el menu
 		imagenControles = new ImageIcon("imagenes/button (2).png");
-		JLabel botoncontroles = new JLabel(imagenControles);
-		panelmenu.add(botoncontroles);
-		botoncontroles.setBounds(115, 190, 150, 40);
-		botoncontroles.setVisible(true);
+		JLabel botonControles = new JLabel(imagenControles);
+		panelMenu.add(botonControles);
+		botonControles.setBounds(115, 190, 150, 40);
+		botonControles.setVisible(true);
 
-		botonjugar.addMouseListener(new MouseAdapter() {
+		botonJugar.addMouseListener(new MouseAdapter() {
 			public void mouseCliked(MouseEvent ev) {
 
-				panelmenu.setVisible(false);
+				panelMenu.setVisible(false);
 
 			}
 		});

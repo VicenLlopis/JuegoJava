@@ -1,4 +1,4 @@
-package Juego;
+package me.vicenllopis.juegojava.juego;
 
 import java.applet.AudioClip;
 import java.awt.Color;
@@ -9,10 +9,14 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import me.vicenllopis.juegojava.objetos.Fondo;
+import me.vicenllopis.juegojava.objetos.Personaje;
 import me.vicenllopis.juegojava.objetos.Planta;
+import me.vicenllopis.juegojava.objetos.Suelo;
+import me.vicenllopis.juegojava.servicios.ControlJuego;
 import me.vicenllopis.juegojava.util.Resource;
 
-public class Juego extends JPanel implements Runnable, KeyListener {
+public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 	public static final float GRAVITY = 1f;
 	public static final float GROUNDY = 800;// por pixel
 	public static final int GAME_PRIMER_ESTADO = 0;
@@ -23,26 +27,24 @@ public class Juego extends JPanel implements Runnable, KeyListener {
 	private Suelo suelo;
 	private Fondo fondo;
 	private Planta planta;
-	private ControlEnemigo controlEnemigos;
+	private ControlJuego controlEnemigos;
 	private BufferedImage gameOver;
 	private int estadoJuego;
 	private int puntos;
 
-	private AudioClip sumarPuntosAudio;
-
-	public Juego() {
+	public JuegoPanel() {
 		thread = new Thread(this);
 		personaje = new Personaje();
 		personaje.setX(150);
 		personaje.setY(150);
 		suelo = new Suelo();
 		fondo = new Fondo();
-		controlEnemigos = new ControlEnemigo(personaje, this);
+		controlEnemigos = new ControlJuego(personaje, this);
 		gameOver = Resource.getSourceImage("imagenes/GameOver.png");
 
 	}
 
-	public static void startGame() {
+	public void startGame() {
 		thread.start();
 
 	}

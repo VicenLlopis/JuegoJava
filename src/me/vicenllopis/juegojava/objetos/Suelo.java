@@ -1,4 +1,4 @@
-package Juego;
+package me.vicenllopis.juegojava.objetos;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

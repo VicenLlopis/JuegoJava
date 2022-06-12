@@ -1,4 +1,4 @@
-package Juego;
+package me.vicenllopis.juegojava.objetos;
 
 import me.vicenllopis.juegojava.util.*;
 import java.awt.Rectangle;

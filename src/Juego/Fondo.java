@@ -4,21 +4,24 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-import me.vicenllopis.juegojava.util.Resource; 
-
+import me.vicenllopis.juegojava.util.Resource;
 
 public class Fondo {
 	private ArrayList<ImagenFondo> fondoLista;
 	private BufferedImage imagenFondo1;
-	// Le das el tama�o que quieras al fondo y lo a�ades a la lista para poder hacer
+	// Le das el tama�o que quieras al fondo y lo aades a la lista para poder hacer
 	// que se mueva
 
-	public Fondo(Juego juegito) {
-		imagenFondo1 = Resource.getSourceImage("imagenes/Cartoon_Forest_BG_01.png");
-		fondoLista = new ArrayList<ImagenFondo>();
-		int tamañoFondo = 20000 / imagenFondo1.getWidth() + 1;
-		for (int i = 0; i < tamañoFondo; i++) {
+	public Fondo() {
+		// generate a random number between 0 and 3
+		Random r = new Random();
+		int randomNumber = r.nextInt(4);
+		imagenFondo1 = Resource.getSourceImage("imagenes/back" + randomNumber + ".png");
+		fondoLista = new ArrayList<>();
+		int tamanoFondo = 20000 / imagenFondo1.getWidth() + 1;
+		for (int i = 0; i < tamanoFondo; i++) {
 			ImagenFondo imagenFondo = new ImagenFondo();
 			imagenFondo.PosX = (int) (i * imagenFondo1.getWidth());
 			imagenFondo.imagen = imagenFondo1;

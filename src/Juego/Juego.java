@@ -36,7 +36,7 @@ public class Juego extends JPanel implements Runnable, KeyListener {
 		personaje.setX(150);
 		personaje.setY(150);
 		suelo = new Suelo();
-		fondo = new Fondo(this);
+		fondo = new Fondo();
 		controlEnemigos = new ControlEnemigo(personaje, this);
 		gameOver = Resource.getSourceImage("imagenes/GameOver.png");
 
@@ -127,6 +127,7 @@ public class Juego extends JPanel implements Runnable, KeyListener {
 		controlEnemigos.restartEnemigos();
 		estadoJuego = GAME_JUGAR_ESTADO;
 		puntos = 0;
+		fondo = new Fondo();
 	}
 
 	@Override

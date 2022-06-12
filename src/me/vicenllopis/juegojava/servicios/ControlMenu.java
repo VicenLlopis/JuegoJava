@@ -3,7 +3,7 @@ package me.vicenllopis.juegojava.servicios;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import me.vicenllopis.juegojava.Menu;
+import me.vicenllopis.juegojava.MenuFrame;
 import me.vicenllopis.juegojava.juego.JuegoFrame;
 import me.vicenllopis.juegojava.objetos.interfaces.AbrirMenu;
 
@@ -14,10 +14,10 @@ import me.vicenllopis.juegojava.objetos.interfaces.AbrirMenu;
  */
 public class ControlMenu extends MouseAdapter implements AbrirMenu {
 
-    private Menu menu;
+    private MenuFrame menu;
     private JuegoFrame juego;
 
-    public ControlMenu(Menu menu) {
+    public ControlMenu(MenuFrame menu) {
         this.menu = menu;
     }
 

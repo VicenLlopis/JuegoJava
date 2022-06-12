@@ -15,13 +15,13 @@ import javax.swing.WindowConstants;
 
 import me.vicenllopis.juegojava.servicios.ControlMenu;
 //Menu del Juego
-public class Menu extends JFrame {
+public class MenuFrame extends JFrame {
 	private ImageIcon imagenControles = new ImageIcon("imagenes/controles.png");
 	private ImageIcon imagenJugar = new ImageIcon("imagenes/jugar.png");
 	private ImageIcon imageSalir = new ImageIcon("imagenes/salir.png");
 
 	//Contructor del menu
-	public Menu() {
+	public MenuFrame() {
 		setTitle("Menu");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(600, 400);

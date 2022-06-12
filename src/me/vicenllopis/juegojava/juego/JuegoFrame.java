@@ -11,6 +11,7 @@ public class JuegoFrame extends JFrame {
 		setSize(1100, 905);
 		setResizable(true);
 		setDefaultCloseOperation(JuegoFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		juego = new JuegoPanel();
 		add(juego);
 		addKeyListener(juego);

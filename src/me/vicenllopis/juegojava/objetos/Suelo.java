@@ -20,7 +20,7 @@ public class Suelo {
 		int tamanoSuelo = 1600 / imgSuelo1.getWidth() + 1;
 		for (int i = 0; i < tamanoSuelo; i++) {
 			ImagenSuelo imagenSuelo = new ImagenSuelo();
-			imagenSuelo.posX = (int) (i * imgSuelo1.getWidth());
+			imagenSuelo.posX = (i * imgSuelo1.getWidth());
 			imagenSuelo.imagen = imgSuelo1;
 			listImagen.add(imagenSuelo);
 		}

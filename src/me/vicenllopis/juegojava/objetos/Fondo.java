@@ -25,7 +25,7 @@ public class Fondo {
 		int tamanoFondo = imagenFondo1.getWidth();
 		for (int i = 0; i < tamanoFondo; i++) {
 			ImagenFondo imagenFondo = new ImagenFondo();
-			imagenFondo.PosX = (int) (i * imagenFondo1.getWidth());
+			imagenFondo.posX = (i * imagenFondo1.getWidth());
 			imagenFondo.imagen = imagenFondo1;
 			fondoLista.add(imagenFondo);
 		}
@@ -34,19 +34,19 @@ public class Fondo {
 	// Para que actualice el fondo y se vaya moviendo
 	public void update() {
 		for (ImagenFondo imagenFondo : fondoLista) {
-			imagenFondo.PosX--;
+			imagenFondo.posX--;
 		}
 	}
 
 	// Para imprimir la imagen del fondo en pantalla
 	public void draw(Graphics g) {
 		for (ImagenFondo imagenFondo : fondoLista) {
-			g.drawImage(imagenFondo.imagen, imagenFondo.PosX, 0, null);
+			g.drawImage(imagenFondo.imagen, imagenFondo.posX, 0, null);
 		}
 	}
 	
 	private class ImagenFondo {
-		int PosX;
+		int posX;
 		BufferedImage imagen;
 
 	}

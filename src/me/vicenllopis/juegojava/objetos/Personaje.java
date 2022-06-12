@@ -8,7 +8,6 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class Personaje {
@@ -91,10 +90,7 @@ public class Personaje {
 
 	// Para pasarle la imagen del personaje el paint Graphics
 	public void draw(Graphics g) {
-		g.setColor(Color.black);
-		g.drawOval((int) x, (int) y, (int) this.getBounds().getWidth(),
-				(int) this.getBounds().getHeight());
-		g.drawImage(anim.getFrame(), (int) x, (int) y, null);
+		g.drawImage(anim.getFrame(),x ,y , null);
 	}
 
 	//Getters y Setters

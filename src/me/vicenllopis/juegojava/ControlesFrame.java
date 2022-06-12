@@ -10,8 +10,9 @@ import javax.swing.WindowConstants;
 
 import java.awt.Image;
 
-public class ControlsFrame extends JFrame {
-    public ControlsFrame() {
+//Clase para mostrar el panel controles del juego
+public class ControlesFrame extends JFrame {
+    public ControlesFrame() {
         super("Controles");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(300, 400);
@@ -21,7 +22,7 @@ public class ControlsFrame extends JFrame {
 
         init();
     }
-
+    //Funcion para inicializar el panel
     public void init() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -30,10 +31,13 @@ public class ControlsFrame extends JFrame {
         add(panel);
         pack();
     }
-
+    //Funcion para agregar los componentes al panel
     void addComponets(JPanel panel) {
+
         Image logoImg = new ImageIcon("imagenes/anim1.png").getImage();
-        logoImg = logoImg.getScaledInstance(50,80, Image.SCALE_SMOOTH);
+        
+        //Para rescalar la imagen
+        logoImg = logoImg.getScaledInstance(50, 80, Image.SCALE_SMOOTH);
 
         JLabel logo = new JLabel();
         logo.setIcon(new ImageIcon(logoImg));

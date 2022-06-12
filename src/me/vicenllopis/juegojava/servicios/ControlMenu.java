@@ -21,13 +21,17 @@ public class ControlMenu extends MouseAdapter implements AbrirMenu {
         this.menu = menu;
     }
 
+    //Funcion implementada de la interface AbrirMenu
+    // * Esta funcion se ejecuta cuando se hace click en el boton de escape
+    // * Se abre el menu y se cierra el juego
     @Override
     public void abrir() {
         menu.setVisible(true);
         juego.dispose();
         juego = null;
     }
-
+    
+    //Cuando le das click al boton de jugar se ejecuta el juego
     @Override
     public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);

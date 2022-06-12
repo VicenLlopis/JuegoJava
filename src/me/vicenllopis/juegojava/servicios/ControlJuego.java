@@ -13,9 +13,13 @@ import me.vicenllopis.juegojava.util.Resource;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
 
+
+//Clase que controlo los enemigos, la puntuacion y otras funciones del juego
 public class ControlJuego {
 
+	//Variables 
 	private List<Enemigo> enemigos;
 	private Random random;
 	private BufferedImage imgPlanta1;
@@ -23,6 +27,7 @@ public class ControlJuego {
 	private Personaje personaje;
 	private JuegoPanel juego;
 
+	//Constructor de la clase ControlJuego
 	public ControlJuego(Personaje personaje, JuegoPanel juego) {
 		this.juego = juego;
 		this.personaje = personaje;
@@ -34,32 +39,42 @@ public class ControlJuego {
 
 	}
 
+	//Metodo para reiniciar los enmigos
 	public void restartEnemigos() {
 		enemigos.clear();
 		enemigos.add(getRandomPlanta());
 	}
 
-	// A�ade un enemigo cuando uno pase por la mitad del mapa
+	// Anade un enemigo cuando uno pase por la mitad del mapa
 	public void update() {
 		for (Enemigo e : enemigos) {
 			e.update();
+			//Para sume la puntuacion cuando el personaje este arriba del enemigo una vez
 			if (estaEncima(e, personaje) && !e.sumaPunto()) {
 				juego.sumarPuntos(10);
 				e.setSumaPunto(true);
 			}
-			if (e.getBounds().intersects(personaje.getBounds())) {
+
+			//Cuando colisionen que se muera el personaje
+			if (e.getBounds().intersects(hack(personaje.getBounds()))) {
 				personaje.setVivo(false);
 			}
 		}
 		Enemigo primerEnemigo = enemigos.get(0);
+
+		//Para que salga otro enemigo cuando el primero salga del mapa
 		if (primerEnemigo.estaMitad()) {
 			enemigos.remove(primerEnemigo);
 			enemigos.add(getRandomPlanta());
-
 		}
-
+	}
+	
+	//Cambia el tamaño de la colision para que ajustarlo
+	private Rectangle hack(Rectangle personaje) {
+		return new Rectangle(personaje.x + 10, personaje.y + 10, personaje.width - 20, personaje.height - 20);
 	}
 
+	//Metodo para saber si el personaje esta encima del enemigo
 	private boolean estaEncima(Enemigo e, Personaje p) {
 		return p.getX() > e.getBounds().x;
 	}
@@ -79,6 +94,7 @@ public class ControlJuego {
 
 	}
 
+	//Metodo para dibujar los enemigos
 	public void draw(Graphics g) {
 		for (Enemigo e : enemigos) {
 			e.draw(g);

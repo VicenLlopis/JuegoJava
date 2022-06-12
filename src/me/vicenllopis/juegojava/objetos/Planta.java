@@ -6,9 +6,10 @@ import me.vicenllopis.juegojava.objetos.interfaces.Enemigo;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-
+//Clase para implementar los metodos y las variables de las plantas
 public class Planta extends Enemigo {
 
+	//Variables
 	private boolean siSumaPunto = false;
 
 	public BufferedImage getImgPlanta() {
@@ -26,13 +27,14 @@ public class Planta extends Enemigo {
 	public void setPosY(int y) {
 		posY = y;
 	}
-
+ 	//Constructor de la clase Planta
 	public Planta() {
 		posX = 500;
 		posY = 725;
 		rect = new Rectangle();
 	}
 
+	//Metodo para actualar la posicion de la planta y las colisiones
 	@Override
 	public void update() {
 		posX = posX - 20;

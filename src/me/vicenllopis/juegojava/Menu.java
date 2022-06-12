@@ -14,12 +14,13 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import me.vicenllopis.juegojava.servicios.ControlMenu;
-
+//Menu del Juego
 public class Menu extends JFrame {
 	private ImageIcon imagenControles = new ImageIcon("imagenes/controles.png");
 	private ImageIcon imagenJugar = new ImageIcon("imagenes/jugar.png");
 	private ImageIcon imageSalir = new ImageIcon("imagenes/salir.png");
 
+	//Contructor del menu
 	public Menu() {
 		setTitle("Menu");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -30,7 +31,7 @@ public class Menu extends JFrame {
 
 		init();
 	}
-
+	//Funcion para inicializar el panel
 	public void init() {
 		final Image logoImg = new ImageIcon("imagenes/anim1.png").getImage();
 		final Image finalImg = logoImg.getScaledInstance(100, 190, Image.SCALE_SMOOTH);
@@ -43,7 +44,6 @@ public class Menu extends JFrame {
 
 		};
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		// create a menu with 3 buttons (play, controls, exit) and add it to the panel
 		JLabel jugar = new JLabel();
 		jugar.setBounds(100, 100, 100, 100);
 		jugar.setIcon(imagenJugar);
@@ -62,20 +62,21 @@ public class Menu extends JFrame {
 		salir.setBorder(BorderFactory.createEmptyBorder(50, 175, 20, 50));
 		panel.add(salir);
 
-		// Add credits for the author
+		
 		JLabel creditos = new JLabel("Juego creado por Vicen Llopis");
 		creditos.setBounds(100, 400, 100, 100);
 		creditos.setBorder(BorderFactory.createEmptyBorder(10, 80, 20, 50));
 		panel.add(creditos);
 
-		// add a mouse listener to the buttons
+		// añade Mouse Listener de la clase ControlMenu
 		jugar.addMouseListener(new ControlMenu(this));
 
+		// añade Mouse Listener de controles
 		controles.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				EventQueue.invokeLater(() -> {
 					try {
-						ControlsFrame frame = new ControlsFrame();
+						ControlesFrame frame = new ControlesFrame();
 						frame.setVisible(true);
 					} catch (Exception e1) {
 						e1.printStackTrace();
@@ -83,7 +84,7 @@ public class Menu extends JFrame {
 				});
 			}
 		});
-
+	// añade Mouse Listener de Salir
 		salir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

@@ -22,6 +22,7 @@ public class Personaje {
 	private Rectangle rect = new Rectangle();
 	private boolean vivo = true;
 
+	// Constructores
 	public boolean getVivo() {
 		return vivo;
 	}
@@ -30,10 +31,12 @@ public class Personaje {
 		this.vivo = vivo;
 	}
 
+	//Contructor de la clase Personaje que recibe una animacion
 	public Personaje() {
 		loadAnimation();
 	}
 
+	//Añade las imagenes a la animacion
 	private void loadAnimation() {
 		anim = new Animaciones(100);
 		anim.addFrame(Resource.getSourceImage("imagenes/anim1.png"));
@@ -43,6 +46,7 @@ public class Personaje {
 		anim.addFrame(Resource.getSourceImage("imagenes/anim5.png"));
 	}
 
+	//Metodo que devuelve la animacion del personaje
 	public void update() {
 		anim.update();
 		// para que se queda quieto a la altura del suelo y siga bajando
@@ -53,6 +57,7 @@ public class Personaje {
 			speedy += GRAVITY;
 			y += speedy;
 		}
+		//Variables para las colisiones
 		rect.x = x;
 		rect.y = y;
 		rect.width = anim.getFrame().getWidth();
@@ -65,17 +70,22 @@ public class Personaje {
 
 	// Para que salte y poder cambiar la fuerza del salto
 	public void jump() {
-		try {
-			AudioInputStream audioInputStream = AudioSystem
-					.getAudioInputStream(new File("sonidos/jump.wav").getAbsoluteFile());
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioInputStream);
-			clip.start();
-		} catch (Exception ex) {
-			System.out.println("Error with playing sound.");
-			ex.printStackTrace();
+		//Añade audio al salto y salta si el personaje no esta por los aires
+		if (y >= FLOOR_ALTITUDE - anim.getFrame().getHeight()) {
+			try {
+				AudioInputStream audioInputStream = AudioSystem
+						.getAudioInputStream(new File("sonidos/jump.wav").getAbsoluteFile());
+				Clip clip = AudioSystem.getClip();
+				clip.open(audioInputStream);
+				clip.start();
+			} catch (Exception ex) {
+				System.out.println("Error with playing sound.");
+				ex.printStackTrace();
+			}
+			speedy = -14;
+		} else {
+			speedy = 0;
 		}
-		speedy = -14;
 		y += speedy;
 	}
 
@@ -87,6 +97,7 @@ public class Personaje {
 		g.drawImage(anim.getFrame(), (int) x, (int) y, null);
 	}
 
+	//Getters y Setters
 	public int getX() {
 		return x;
 	}

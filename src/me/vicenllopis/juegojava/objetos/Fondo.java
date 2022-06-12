@@ -8,13 +8,15 @@ import java.util.Random;
 
 import me.vicenllopis.juegojava.util.Resource;
 
+//Clase para dibujar el fondo del juego
 public class Fondo {
 	private ArrayList<ImagenFondo> fondoLista;
 	private BufferedImage imagenFondo1;
-	// Le das el tama�o que quieras al fondo y lo aades a la lista para poder hacer
-	// que se mueva
 
+
+	//Contrustor de la clase Fondo que recibe una imagen de fondo aleatoria
 	public Fondo() {
+
 		// generate a random number between 0 and 3
 		Random r = new Random();
 		int randomNumber = r.nextInt(4);
@@ -42,7 +44,7 @@ public class Fondo {
 			g.drawImage(imagenFondo.imagen, imagenFondo.PosX, 0, null);
 		}
 	}
-
+	
 	private class ImagenFondo {
 		int PosX;
 		BufferedImage imagen;

@@ -8,7 +8,7 @@ import me.vicenllopis.juegojava.objetos.interfaces.AbrirMenu;
 public class JuegoFrame extends JFrame {
 
 	private JuegoPanel juego;
-
+	//Contrustor que inicializa las variables y crea el juego
 	public JuegoFrame(AbrirMenu abrirMenu) {
 		super("Juego Robot");
 		setSize(1100, 905);
@@ -20,7 +20,7 @@ public class JuegoFrame extends JFrame {
 		addKeyListener(juego);
 		setVisible(false);
 	}
-
+	//Funcion para inical el Juego y que se pueda ver
 	public void startGame() {
 		setVisible(true);
 		juego.startGame();

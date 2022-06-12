@@ -1,6 +1,5 @@
 package me.vicenllopis.juegojava.juego;
 
-import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -13,6 +12,7 @@ import me.vicenllopis.juegojava.objetos.Fondo;
 import me.vicenllopis.juegojava.objetos.Personaje;
 import me.vicenllopis.juegojava.objetos.Planta;
 import me.vicenllopis.juegojava.objetos.Suelo;
+import me.vicenllopis.juegojava.objetos.interfaces.AbrirMenu;
 import me.vicenllopis.juegojava.servicios.ControlJuego;
 import me.vicenllopis.juegojava.util.Resource;
 
@@ -31,8 +31,10 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 	private BufferedImage gameOver;
 	private int estadoJuego;
 	private int puntos;
+	private AbrirMenu abrirMenu;
 
-	public JuegoPanel() {
+
+	public JuegoPanel(AbrirMenu abrirMenu) {
 		thread = new Thread(this);
 		personaje = new Personaje();
 		personaje.setX(150);
@@ -41,6 +43,8 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 		fondo = new Fondo();
 		controlEnemigos = new ControlJuego(personaje, this);
 		gameOver = Resource.getSourceImage("imagenes/GameOver.png");
+
+		this.abrirMenu = abrirMenu;
 
 	}
 
@@ -153,6 +157,9 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 				break;
 			case KeyEvent.VK_R:
 				reiniciar();
+				break;
+			case KeyEvent.VK_ESCAPE:
+				abrirMenu.abrir();
 				break;
 		}
 	}

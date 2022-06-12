@@ -6,7 +6,7 @@ public class JuegoMain {
 	static JuegoFrame juegoFrame;
 
 	public static void main(String[] args) {
-		juegoFrame = new JuegoFrame();
+		juegoFrame = new JuegoFrame(null);
 	}
 
 }

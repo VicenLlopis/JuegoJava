@@ -3,6 +3,7 @@ package me.vicenllopis.juegojava;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.function.Function;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -14,6 +15,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 
 import me.vicenllopis.juegojava.juego.JuegoFrame;
+import me.vicenllopis.juegojava.objetos.interfaces.AbrirMenu;
+import me.vicenllopis.juegojava.servicios.ControlMenu;
 import me.vicenllopis.juegojava.util.Animaciones;
 import me.vicenllopis.juegojava.util.Resource;
 
@@ -71,29 +74,23 @@ public class Menu extends JFrame {
 		panel.add(creditos);
 
 		// add a mouse listener to the buttons
-		jugar.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				JuegoFrame juego = new JuegoFrame();
-			}
-		});
+		jugar.addMouseListener(new ControlMenu(this));
 
 		controles.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							ControlsFrame frame = new ControlsFrame();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+				EventQueue.invokeLater(() -> {
+					try {
+						ControlsFrame frame = new ControlsFrame();
+						frame.setVisible(true);
+					} catch (Exception e1) {
+						e1.printStackTrace();
 					}
 				});
 			}
 		});
 
 		salir.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.exit(0);
 			}

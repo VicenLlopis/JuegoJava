@@ -29,9 +29,9 @@ public class Planta extends Enemigo {
 
 	public Planta() {
 		posX = 500;
-		posY = 720;
+		posY = 725;
 		rect = new Rectangle();
-		}
+	}
 
 	@Override
 	public void update() {

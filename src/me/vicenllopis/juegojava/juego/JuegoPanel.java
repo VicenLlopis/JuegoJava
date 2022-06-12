@@ -1,6 +1,7 @@
 package me.vicenllopis.juegojava.juego;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -65,7 +66,6 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 
 	public void startGame() {
 		thread.start();
-
 	}
 
 	// lo que se ejecuta del juego
@@ -107,10 +107,22 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 				controller.update();
 				musica.start();
 				if (!personaje.getVivo()) {
+					try {
+						AudioInputStream audioInputStream = AudioSystem
+								.getAudioInputStream(
+										new File("sonidos/death.wav").getAbsoluteFile());
+						Clip clip = AudioSystem.getClip();
+						clip.open(audioInputStream);
+						clip.start();
+					} catch (Exception ex) {
+						System.out.println("Error with playing sound.");
+						ex.printStackTrace();
+					}
 					estadoJuego = GAME_FINAL_ESTADO;
 				}
 				break;
 			case GAME_FINAL_ESTADO:
+
 				musica.stop();
 				musica.close();
 				try {
@@ -152,15 +164,21 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 				suelo.draw(g);
 				personaje.draw(g);
 				controller.draw(g);
-				g.drawString("Puntuacion: " + puntos, 900, 200);
+				g.setFont(new Font("Arial", Font.BOLD, 30));
+				g.setColor(Color.white);
+				g.drawString("Puntuacion: " + puntos, 850, 50);
 				break;
 			case GAME_FINAL_ESTADO:
 				fondo.draw(g);
 				suelo.draw(g);
 				personaje.draw(g);
 				controller.draw(g);
-				g.drawImage(gameOver, 300, 200, null);
-				g.drawString("Puntuacion Final: " + puntos, 400, 150);
+				g.setColor(Color.white);
+				g.fillOval(250, 80, gameOver.getWidth() + 270, gameOver.getHeight() + 170);
+				g.setFont(new Font("Arial", Font.BOLD, 30));
+				g.setColor(Color.black);
+				g.drawString("Puntuacion Final: " + puntos, 420, 180);
+				g.drawImage(gameOver, 380, 200, null);
 				break;
 			default:
 				break;
@@ -217,6 +235,5 @@ public class JuegoPanel extends JPanel implements Runnable, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// No se necesita
-
 	}
 }
